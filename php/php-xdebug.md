@@ -28,6 +28,9 @@ xdebug.remote_port = 9000
 
 xdebug.max_nesting_level = 512
 
+; 影响var_dump打印层级
+xdebug.var_display_max_depth = 16
+
 ; attempt to debug every php script
 ; 开启后所有请求都会进行debug 关闭后请求时带XDEBUG_SESSION_START参数才会进行debug 
 xdebug.remote_autostart = 1
