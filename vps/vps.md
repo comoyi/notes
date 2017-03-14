@@ -8,7 +8,7 @@ Linode | $5/month
 Digital Ocean | $5/month
 Vultr | $2.5/month
 Bandwagon Host | $19.9/year
-==每家主机商每人只能注册一个帐号且不可给别人充值，否则所有帐号都会被封号==
+每家主机商每人只能注册一个帐号且不可给别人充值，否则所有帐号都会被封号
 
 ### 选择机房位置
 
@@ -48,7 +48,7 @@ root    ALL=(ALL)       ALL
 michael    ALL=(ALL)       ALL
 ```
 
-### 从==自己电脑==拷贝PublicKey到VPS
+### 从自己电脑拷贝PublicKey到VPS
 ```
 # 拷贝PublicKey 记得输入用户对应的密码 PublicKey会拷贝到 ~/.ssh/authorized_keys
 ssh-copy-id -i ~/.ssh/id_rsa.pub michael@45.77.18.79
@@ -64,6 +64,7 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub michael@45.77.18.79
 ```bash
 # 修改sshd配置文件
 vim /etc/ssh/sshd_config
+
 # 修改/etc/ssh/sshd_config以下几项
 PermitRootLogin no
 PasswordAuthentication no
@@ -89,5 +90,5 @@ sudo yum install -y tree
 su
 ```
 
-==以上演示ip已失效请更换为你自己的==
+以上演示ip已失效请更换为你自己的
 
