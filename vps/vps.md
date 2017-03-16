@@ -8,6 +8,7 @@ Linode | $5/month
 Digital Ocean | $5/month
 Vultr | $2.5/month
 Bandwagon Host | $19.9/year
+
 每家主机商每人只能注册一个帐号且不可给别人充值，否则所有帐号都会被封号
 
 ### 选择机房位置
