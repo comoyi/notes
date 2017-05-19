@@ -30,3 +30,8 @@ use Illuminate\Support\Facades\DB;
 DB::enableQueryLog();
 DB::getQueryLog();
 ```
+
+#### all routes
+```
+$routes = app()->routes->getRoutes();
+```
