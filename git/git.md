@@ -103,6 +103,16 @@ git diff --staged
 git diff HEAD
 ```
 
+#### 只显示差异的文件
+```
+git diff master develop --name-only
+```
+
+#### 显示差异的文件和修改状态
+```
+git diff master develop --name-status
+```
+
 #### 将文件从index移除
 
 ```bash
