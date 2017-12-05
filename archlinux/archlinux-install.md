@@ -144,6 +144,13 @@ reboot
 wifi-menu
 ```
 
+## Update
+```
+pacman -Syy
+pacman -S archlinux-keyring
+pacman -Syu
+```
+
 ## Install sudo
 ```
 pacman -S sudo
