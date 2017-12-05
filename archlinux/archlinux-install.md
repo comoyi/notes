@@ -3,36 +3,56 @@
 ```
 wifi-menu
 ```
+
 ## Update the system clock
 ```
 timedatectl set-ntp true
 ```
 
 ## Disk
-Size
+partition | size
+---|---
+/boot/efi | 512M
+/boot | 1G
+/ | 50G
+/home | 400G
+swap | 16G
+[for snapshot] | 9G 
+
+### Partition the disks
 ```
-/boot/efi 512M
-/boot 1G
-swap 16G
-/ 64G
-/home 450G
+fdisk /dev/nvme0n1
 ```
 
+### Use lvm
 ```
+lvmdiskscan
+pvcreate /dev/nvme0n1p3
+pvdisplay
+vgcreate vg0 /dev/nvme0n1p3
+vgdisplay
+lvcreate -L 64G vg0 -n lvroot
+lvcreate -L 450G vg0 -n lvhome
+lvcreate -L 16G vg0 -n lvswap
+lvdisplay
+
 mkfs.fat -F32 /dev/nvme0n1p1
-mkfs.ext4 /dev/nvme0n1p2
-mkswap /dev/nvme0n1p3
-mkfs.ext4 /dev/nvme0n1p4
-mkfs.ext4 /dev/nvme0n1p5
-
-mount /dev/nvme0n1p4 /mnt
+mkfs.xfs /dev/nvme0n1p2
+mkfs.xfs /dev/mapper/vg0-lvroot
+mkfs.xfs /dev/mapper/vg0-lvhome
+mkswap/dev/mapper/vg0-lvswap
+mount /dev/mapper/vg0-lvroot /mnt
 mkdir /mnt/boot
 mount /dev/nvme0n1p2 /mnt/boot
 mkdir /mnt/boot/efi
 mount /dev/nvme0n1p1 /mnt/boot/efi
 mkdir /mnt/home
-mount /dev/nvme0n1p5 /mnt/home
+mount /dev/mapper/vg0-lvhome /mnt/home
+
 ```
+
+## Select the mirrors
+Edit /etc/pacman.d/mirrorlist
 
 ## Install the base packages
 ```
@@ -77,6 +97,8 @@ hostname
 ```
 pacman -S iw wpa_supplicant dialog networkmanager
 ```
+
+## If you use lvm edit /etc/mkinitcpio.conf add lvm2 before filesystem
 
 ## Create the initramfs image
 ```
@@ -160,5 +182,5 @@ visudo
 
 ## Softwares
 ```
-pacman -S vim tree openssh
+pacman -S vim openssh
 ```
