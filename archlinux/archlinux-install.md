@@ -139,6 +139,22 @@ reboot
 
 # After install
 
+## Connect internet
+```
+wifi-menu
+```
+
+## Install sudo
+```
+pacman -S sudo
+```
+
+## Add user and set password
+```
+useradd -m -G wheel -s /bin/bash -c 'Michael' michael
+passwd michael
+```
+
 ## Network
 ```
 systemctl enable NetworkManager.service
@@ -162,24 +178,13 @@ For the GNOME on Xorg session, add to the ~/.xinitrc file: exec gnome-session.
 pacman -S wqy-microhei
 ```
 
+## Softwares
+```
+pacman -S vim openssh
+```
+
 ## Install input method
 ```
 pacman -S fcitx
 pacman -S fcitx-sogoupinyin
-```
-
-## Install sudo
-```
-pacman -S sudo
-```
-
-## Add user and set password
-```
-useradd -m -G wheel -s /bin/bash -c 'Michael' michael
-passwd michael
-```
-
-## Softwares
-```
-pacman -S vim openssh
 ```
