@@ -40,7 +40,7 @@ mkfs.fat -F32 /dev/nvme0n1p1
 mkfs.xfs /dev/nvme0n1p2
 mkfs.xfs /dev/mapper/vg0-lvroot
 mkfs.xfs /dev/mapper/vg0-lvhome
-mkswap/dev/mapper/vg0-lvswap
+mkswap /dev/mapper/vg0-lvswap
 mount /dev/mapper/vg0-lvroot /mnt
 mkdir /mnt/boot
 mount /dev/nvme0n1p2 /mnt/boot
@@ -48,7 +48,7 @@ mkdir /mnt/boot/efi
 mount /dev/nvme0n1p1 /mnt/boot/efi
 mkdir /mnt/home
 mount /dev/mapper/vg0-lvhome /mnt/home
-
+swapon /dev/mapper/vg0-lvswap
 ```
 
 ## Select the mirrors
