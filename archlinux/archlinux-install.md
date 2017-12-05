@@ -168,16 +168,15 @@ pacman -S fcitx
 pacman -S fcitx-sogoupinyin
 ```
 
-## Add user and set password
-```
-useradd -m michael
-passwd michael
-```
-
-## Sudo
+## Install sudo
 ```
 pacman -S sudo
-visudo
+```
+
+## Add user and set password
+```
+useradd -m -G wheel -s /bin/bash -c 'Michael' michael
+passwd michael
 ```
 
 ## Softwares
