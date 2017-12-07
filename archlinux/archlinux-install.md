@@ -83,7 +83,7 @@ hwclock --systohc
 ```
 
 ## Locale
-Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them with:
+Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them
 ```
 vi /etc/locale.gen
 locale-gen
@@ -176,6 +176,7 @@ Change
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
 to
 GRUB_CMDLINE_LINUX_DEFAULT="quiet resume=UUID=bcc3d275-0f27-45e2-adc4-3462b772f6a4"
+Remenber to change UUID to yours
 
 Regenerate grub
 ```
@@ -222,5 +223,4 @@ pacman -S vim openssh
 ## Install input method
 ```
 pacman -S fcitx
-pacman -S fcitx-sogoupinyin
 ```
