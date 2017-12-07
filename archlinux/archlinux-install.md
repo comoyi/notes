@@ -90,15 +90,12 @@ locale-gen
 ```
 
 ## Set the LANG variable in locale.conf accordingly, for example:
-/etc/locale.conf
 LANG=en_US.UTF-8
 ```
 vi /etc/locale.conf
 ```
 
-## Create the hostname file:
-/etc/hostname
-hostname
+## Create the hostname file and set a hostname
 ```
 vi /etc/hostname
 ```
