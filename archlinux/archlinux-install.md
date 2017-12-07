@@ -15,9 +15,9 @@ partition | size
 /boot/efi | 512M
 /boot | 1G
 / | 50G
-/home | 400G
+/home | 358G
 swap | 16G
-[for snapshot] | 9G 
+[for snapshot] | 50G 
 
 ### Partition the disks
 ```
@@ -31,8 +31,8 @@ pvcreate /dev/nvme0n1p3
 pvdisplay
 vgcreate vg0 /dev/nvme0n1p3
 vgdisplay
-lvcreate -L 64G vg0 -n lvroot
-lvcreate -L 450G vg0 -n lvhome
+lvcreate -L 50G vg0 -n lvroot
+lvcreate -L 358G vg0 -n lvhome
 lvcreate -L 16G vg0 -n lvswap
 lvdisplay
 
@@ -53,6 +53,9 @@ swapon /dev/mapper/vg0-lvswap
 
 ## Select the mirrors
 Edit /etc/pacman.d/mirrorlist
+```
+vim /etc/pacman.d/mirrorlist
+```
 
 ## Install the base packages
 ```
@@ -80,25 +83,36 @@ hwclock --systohc
 ```
 
 ## Locale
-Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them with:
+Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them
 ```
+vi /etc/locale.gen
 locale-gen
 ```
 
 ## Set the LANG variable in locale.conf accordingly, for example:
 /etc/locale.conf
 LANG=en_US.UTF-8
+```
+vi /etc/locale.conf
+```
 
 ## Create the hostname file:
 /etc/hostname
 hostname
+```
+vi /etc/hostname
+```
 
 ## Network
 ```
 pacman -S iw wpa_supplicant dialog networkmanager
 ```
 
-## If you use lvm edit /etc/mkinitcpio.conf add lvm2 before filesystem
+## If you use lvm edit /etc/mkinitcpio.conf add lvm2 resume before filesystem
+Example: HOOKS=(base udev autodetect modconf block lvm2 resume filesystems keyboard fsck)
+```
+vi /etc/mkinitcpio.conf
+```
 
 ## Create the initramfs image
 ```
@@ -125,6 +139,7 @@ Set the boot directory and set the bootloader ID. Mount the ESP partition
 ```
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub
 ```
+
 Use the grub-mkconfig tool to generate grub.cfg
 ```
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -151,6 +166,23 @@ pacman -S archlinux-keyring
 pacman -Syu
 ```
 
+## Hibernate
+Get swap UUID
+```
+blkid /dev/mapper/vg0-lvswap
+```
+
+Change
+GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+to
+GRUB_CMDLINE_LINUX_DEFAULT="quiet resume=UUID=bcc3d275-0f27-45e2-adc4-3462b772f6a4"
+Remenber to change UUID to yours
+
+Regenerate grub
+```
+grub-mkconfig -o /boot/grub/grub.cfg
+```
+
 ## Install sudo
 ```
 pacman -S sudo
@@ -164,21 +196,19 @@ passwd michael
 
 ## Network
 ```
-systemctl enable NetworkManager.service
+systemctl enable NetworkManager
 ```
 
 ## VPN
 ```
-pacman -S networkmanager-strongswan networkmanager-pptp
+pacman -S networkmanager-pptp
 ```
 
 ## GNOME
 ```
 pacman -S xorg gnome
-systemctl enable gdm.service
+systemctl enable gdm
 ```
-
-For the GNOME on Xorg session, add to the ~/.xinitrc file: exec gnome-session.
 
 ## Add font
 ```
@@ -193,5 +223,4 @@ pacman -S vim openssh
 ## Install input method
 ```
 pacman -S fcitx
-pacman -S fcitx-sogoupinyin
 ```
