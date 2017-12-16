@@ -10,6 +10,28 @@ pacman -Syu
 pacman -Sy
 ```
 
+## 查询相关
+
+### 查询包
+```
+pacman -Ss search_str
+```
+
+### 查询包信息
+```
+pacman -Si package_name
+```
+
+### 查询已安装的
+```
+pacman -Qs search_str
+```
+
+### 查询已安装的包信息
+```
+pacman -Qi package_name
+```
+
 ## 安装相关
 
 ### 安装

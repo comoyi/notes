@@ -170,9 +170,13 @@ blkid /dev/mapper/vg0-lvswap
 ```
 
 Change
+
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
+
 to
+
 GRUB_CMDLINE_LINUX_DEFAULT="quiet resume=UUID=bcc3d275-0f27-45e2-adc4-3462b772f6a4"
+
 Remenber to change UUID to yours
 
 Regenerate grub
@@ -221,3 +225,22 @@ pacman -S vim openssh
 ```
 pacman -S fcitx
 ```
+
+# More
+
+## Make LVM snapshot for recovery
+
+Shutdown and start from archlinux live CD
+
+Create snapshot for /dev/vg0/lvroot and /dev/vg0/lvhome
+```
+lvcreate -L 30G -s -n my_snapshot_root /dev/vg0/lvroot
+lvcreate -L 20G -s -n my_snapshot_home /dev/vg0/lvhome
+```
+
+Regenerate UUID of the snapshot otherwise the snapshot partition UUID will be the same as the original partition
+```
+xfs_admin -U generate /dev/vg0/my_snapshot_root
+xfs_admin -U generate /dev/vg0/my_snapshot_home
+```
+
