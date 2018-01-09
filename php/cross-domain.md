@@ -16,8 +16,6 @@ if (in_array($origin, $allowOrigins)) {
     header('Access-Control-Allow-Headers: Content-Type, Content-Range, Content-Disposition, Content-Description');
     header('Access-Control-Allow-Credentials: true');
 }
-
-
 `````
 
 ## 跨一个域
