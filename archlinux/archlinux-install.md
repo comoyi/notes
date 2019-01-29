@@ -169,6 +169,8 @@ Get swap UUID
 blkid /dev/mapper/vg0-lvswap
 ```
 
+Edit /etc/default/grub
+
 Change
 
 GRUB_CMDLINE_LINUX_DEFAULT="quiet"
