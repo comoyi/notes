@@ -244,3 +244,8 @@ xfs_admin -U generate /dev/vg0/my_snapshot_root
 xfs_admin -U generate /dev/vg0/my_snapshot_home
 ```
 
+Remove snapshot (If you want recreate snapshot or delete snapshot)
+```
+lvremove /dev/vg0/my_snapshot_root
+lvremove /dev/vg0/my_snapshot_home
+```
