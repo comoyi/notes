@@ -31,7 +31,7 @@ location = /.well-known/acme-challenge/ {
 certbot certonly --webroot -w /var/www/html/path-to-project -d demo.xxx.com
 ```
 
-## Add to site config
+## Add to nginx site config
 
 ```
 listen 443 ssl;
