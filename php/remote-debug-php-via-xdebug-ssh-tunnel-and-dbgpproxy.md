@@ -19,17 +19,24 @@ xdebug.idekey = PHPSTORM
 
 网址：http://code.activestate.com/komodo/remotedebugging/ 选择Python版本
 
-```
+```bash
 wget http://downloads.activestate.com/Komodo/releases/11.1.0/remotedebugging/Komodo-PythonRemoteDebugging-11.1.0-91033-linux-x86.tar.gz
+```
+
+下载好后解压并重命名为dbgpproxy
+```bash
+tar zxvf Komodo-PythonRemoteDebugging-11.1.0-91033-linux-x86.tar.gz
+mv Komodo-PythonRemoteDebugging-11.1.0-91033-linux-x86 /usr/local/dbgpproxy
 ```
 
 在远端服务器启动dbgpproxy（这里的路径根据dbgpproxy所在目录填写）
 
-```
+```bash
 export PYTHONPATH=$PYTHONPATH:/usr/local/pydbgpproxy/pythonlib
 ```
 
-```
+```bash
+cd /usr/local/dbgpproxy
 ./pydbgpproxy -d 127.0.0.1:9001 -i 127.0.0.1:9003
 ```
 
@@ -41,14 +48,14 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/pydbgpproxy/pythonlib
 
 如果dbgpproxy端口不对外需要建立sssh隧道
 
-```
+```bash
 # 用于向dbgpproxy注册IDE
 ssh -C -f -N -g -L 9003:127.0.0.1:9003 michael@192.168.0.88
 ```
 
 DBGp通过ssh隧道转发
 
-```
+```bash
 # 用于DBGp转发
 ssh -C -f -N -g -R 9007:127.0.0.1:9007 michael@192.168.0.88
 ```
@@ -85,11 +92,11 @@ Port: 9003
 
 再执行以下命令
 
-```
+```bash
 export XDEBUG_CONFIG="idekey=PHPSTORM"
 ```
 
-```
+```bash
 php public/cli.php xxx xxx
 ```
 
@@ -108,4 +115,3 @@ XDEBUG_SESSION_START=PHPSTORM
 ```
 XDEBUG_SESSION_STOP
 ```
-
