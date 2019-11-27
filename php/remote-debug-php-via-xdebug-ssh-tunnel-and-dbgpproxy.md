@@ -32,7 +32,7 @@ mv Komodo-PythonRemoteDebugging-11.1.0-91033-linux-x86 /usr/local/dbgpproxy
 在远端服务器启动dbgpproxy（这里的路径根据dbgpproxy所在目录填写）
 
 ```bash
-export PYTHONPATH=$PYTHONPATH:/usr/local/pydbgpproxy/pythonlib
+export PYTHONPATH=$PYTHONPATH:/usr/local/dbgpproxy/pythonlib
 ```
 
 ```bash
