@@ -1,4 +1,4 @@
-# Beanstalk
+# Beanstalkd
 
 ## A picture of job lifecycle
 
@@ -36,12 +36,14 @@ make install
 ## Create beanstalkd user
 
 ```bash
+useradd -m -d /var/lib/beanstalkd -s /sbin/nologin -c 'Beanstalkd' beanstalkd
 ```
 
 ## Config Systemd
 
+Copy config
+
 ```bash
-# Copy config
 cp etc/sysconfig/beanstalkd /etc/sysconfig/beanstalkd
 cp usr/lib/systemd/system/beanstalkd.service /usr/lib/systemd/system/beanstalkd.service
 ```
@@ -50,7 +52,7 @@ cp usr/lib/systemd/system/beanstalkd.service /usr/lib/systemd/system/beanstalkd.
 
 ```bash
 mkdir -p /var/lib/beanstalkd/binlog
-chown beanstalkd:beanstalkd /var/lib/beanstalkd/binlog -R
+chown -R beanstalkd:beanstalkd /var/lib/beanstalkd/binlog
 ```
 
 ## Start
