@@ -44,8 +44,9 @@ useradd -m -d /var/lib/beanstalkd -s /sbin/nologin -c 'Beanstalkd' beanstalkd
 Copy config
 
 ```bash
+mkdir /etc/sysconfig
 cp etc/sysconfig/beanstalkd /etc/sysconfig/beanstalkd
-cp usr/lib/systemd/system/beanstalkd.service /usr/lib/systemd/system/beanstalkd.service
+cp -r usr/lib/systemd/system/* /usr/lib/systemd/system
 ```
 
 ## Config beanstalkd
