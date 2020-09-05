@@ -3,8 +3,8 @@ Description=Beanstalkd is a simple, fast work queue
 After=network.target
 
 [Service]
-User=beanstalkd
 Type=simple
+User=beanstalkd
 EnvironmentFile=-/etc/sysconfig/beanstalkd
 ExecStart=/usr/local/bin/beanstalkd -l $BEANSTALKD_ADDR -p $BEANSTALKD_PORT -u $BEANSTALKD_USER -z $BEANSTALKD_MAX_JOB_SIZE -b $BEANSTALKD_BINLOG_DIR -s $BEANSTALKD_BINLOG_SIZE -f $BEANSTALKD_BINLOG_FSYNC_PERIOD
 Restart=always
