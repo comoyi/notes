@@ -74,6 +74,28 @@ gpg -o ~/Downloads/private-subkeys --export-secret-subkeys AC92DF95A2075F0C2C3C3
 gpg -o ~/Downloads/private-subkeys-asc --armor --export-secret-subkeys AC92DF95A2075F0C2C3C3BD57B06AF326381C60A
 ```
 
+### 主密钥建议只用于密钥的管理，导出并备份放到安全的地方（网络隔离的环境）后建议从平时使用的电脑删除
+
+```
+--delete-secret-keys name
+        Remove  key  from  the secret keyring. In batch mode the key must be specified by fingerprint.  The option --yes can be used to advise gpg-agent not to request a
+        confirmation.  This extra pre-caution is done because gpg can't be sure that the secret key (as controlled by gpg-agent) is only used for the given OpenPGP  pub‐
+        lic key.  If the exclamation mark syntax is used with the fingerprint of a subkey only the secret part of that subkey is deleted; if the exclamation mark is used
+        with the fingerprint of the primary key only the secret part of the primary key is deleted.
+```
+
+### 只删除主密钥（注意后面的!）
+
+```
+gpg --delete-secret-keys AC92DF95A2075F0C2C3C3BD57B06AF326381C60A!
+```
+
+### 删除主密钥及其子密钥
+
+```
+gpg --delete-secret-keys AC92DF95A2075F0C2C3C3BD57B06AF326381C60A
+```
+
 ## 签名与验签
 
 ### 生成独立签名文件
