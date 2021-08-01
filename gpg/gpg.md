@@ -90,6 +90,18 @@ gpg -o ~/Downloads/private-subkeys-asc --armor --export-secret-subkeys AC92DF95A
 gpg --delete-secret-keys AC92DF95A2075F0C2C3C3BD57B06AF326381C60A!
 ```
 
+删除主密钥后再次查看密钥，在sec后会多出一个#，代表本地没有主密钥
+
+```
+~ gpg --list-secret-keys --keyid-format long
+--------------------------------
+sec#  rsa4096/7B06AF326381C60A 2021-08-01 [SC]
+      AC92DF95A2075F0C2C3C3BD57B06AF326381C60A
+uid                 [ultimate] Test User <testuser@gmail.com>
+ssb   rsa4096/D8DB85F7B7AC8C95 2021-08-01 [E]
+ssb   rsa4096/E060CBB1BACFCC05 2021-08-01 [S]
+```
+
 ### 删除主密钥及其子密钥
 
 ```
